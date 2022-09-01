@@ -1,10 +1,9 @@
-import tw, { styled } from "twin.macro"
+import Page from "components/Page"
 
 export default function contact() {
-	return <Styledcontact>contact</Styledcontact>
+	return (
+		<Page>
+			<h1>Contact Us</h1>
+		</Page>
+	)
 }
-const Styledcontact = styled.div`
-	${tw`
-        
-    `}
-`
