@@ -1,0 +1,25 @@
+{
+	"name": "matson-brothers-painting",
+	"version": "1.0.0",
+	"description": "uses concurrently to run the NextJS frontend and Sanity Studio backend. ",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"client": "cd client && npm run dev",
+		"studio": "cd studio && npm start",
+		"dev": "concurrently npm:client npm:studio"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/cnr-mtsn/matson-brothers-painting.git"
+	},
+	"author": "Conner Matson",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/cnr-mtsn/matson-brothers-painting/issues"
+	},
+	"homepage": "https://github.com/cnr-mtsn/matson-brothers-painting#readme",
+	"dependencies": {
+		"concurrently": "^7.3.0"
+	}
+}
