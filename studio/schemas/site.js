@@ -1,6 +1,6 @@
 export default {
-	name: "page",
-	title: "Pages",
+	name: "site",
+	title: "Site Settings",
 	type: "document",
 	fields: [
 		{
@@ -9,13 +9,9 @@ export default {
 			type: "string",
 		},
 		{
-			name: "slug",
-			title: "Slug",
-			type: "slug",
-			options: {
-				source: "title",
-				maxLength: 96,
-			},
+			name: "url",
+			title: "URL",
+			type: "url",
 		},
 		{
 			name: "mainImage",
@@ -26,15 +22,19 @@ export default {
 			},
 		},
 		{
-			name: "images",
-			title: "Images",
-			type: "array",
-			of: [{ type: "image" }],
+			name: "email",
+			title: "Email",
+			type: "string",
 		},
 		{
-			name: "textContent",
-			title: "Text Content",
-			type: "blockContent",
+			name: "phone",
+			title: "Phone",
+			type: "string",
+		},
+		{
+			name: "address",
+			title: "Address",
+			type: "string",
 		},
 	],
 	preview: {
