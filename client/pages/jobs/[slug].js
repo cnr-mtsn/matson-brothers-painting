@@ -6,21 +6,7 @@ import { PortableText } from "@portabletext/react"
 export default function Slug({ job }) {
 	console.log("Job: ", job)
 
-	// add custom paragraph component for sanity portable text
-	const serializers = {
-		block: {
-			normal: ({ children }) => (
-				<p tw="mx-auto bg-blue-100 text-black py-1 px-4 rounded shadow hover:shadow-lg w-max">
-					{children}
-				</p>
-			),
-		},
-	}
-	return (
-		<Page title={job.title}>
-			<PortableText value={job.body} components={serializers} />
-		</Page>
-	)
+	return <Page>Job page</Page>
 }
 
 export async function getStaticPaths() {
