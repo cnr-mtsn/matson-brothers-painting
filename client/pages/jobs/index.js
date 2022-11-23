@@ -1,22 +1,19 @@
 import { groq } from "next-sanity"
 import Page from "components/Page"
 import client from "@lib/sanity"
-import Link from "next/link"
+import tw from "twin.macro"
+import Image from "next/image"
+import { useNextSanityImage } from "next-sanity-image"
+import JobCard from "components/jobs/JobCard"
 
 export default function AllJobs({ jobs }) {
 	console.log("Jobs: ", jobs)
-	return jobs.length > 0 ? (
-		<Page title="All Posts">
-			<div tw="flex flex-col gap-2">
-				{jobs?.map(({ title, slug }) => (
-					<Link key={title} href={`/jobs/${slug.current}`}>
-						{title}
-					</Link>
-				))}
-			</div>
+	return (
+		<Page>
+			{jobs?.map(job => (
+				<JobCard job={job} />
+			))}
 		</Page>
-	) : (
-		<Page title="No jobs yet..." />
 	)
 }
 
