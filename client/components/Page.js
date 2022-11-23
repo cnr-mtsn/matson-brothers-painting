@@ -1,11 +1,11 @@
 import tw, { styled } from "twin.macro"
 
-export default function Page({ children }) {
+export default function Page({ children, title }) {
 	return <StyledPage>{children}</StyledPage>
 }
 const StyledPage = styled.div`
-	${tw`text-blue-800`}
-	h1 {
-		${tw`text-3xl font-bold mx-auto w-max my-4`}
+	${tw`p-10`}
+	p {
+		${tw`text-gray-900 dark:text-gray-100`}
 	}
 `

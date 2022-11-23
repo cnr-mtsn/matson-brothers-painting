@@ -1,18 +1,22 @@
-import tw, { GlobalStyles } from "twin.macro"
+import tw, { styled, GlobalStyles } from "twin.macro"
 import Footer from "../components/Footer"
 import Header from "../components/Header"
 
 function MyApp({ Component, pageProps }) {
 	return (
-		<>
+		<StyledApp>
 			<GlobalStyles />
 			<Header />
-			<main tw="min-h-[80vh]">
+			<main>
 				<Component {...pageProps} />
 			</main>
 			{/* <Footer /> */}
-		</>
+		</StyledApp>
 	)
 }
+
+const StyledApp = styled.div`
+	${tw`bg-white dark:bg-black min-h-screen`}
+`
 
 export default MyApp

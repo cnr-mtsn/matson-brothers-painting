@@ -1,28 +1,18 @@
 import client from "@lib/sanity"
+import { PortableText } from "@portabletext/react"
 import Page from "components/Page"
 import { groq } from "next-sanity"
 
-export default function Home({ posts, pageData }) {
-	console.log("Posts:", posts)
-	console.log("Page Data:", pageData)
+export default function Home({ pageData }) {
 	return (
-		<Page>
-			<h1>{pageData.title}</h1>
-			{posts?.map(({ title, _createdAt }) => (
-				<p key={_createdAt}>{title}</p>
-			))}
+		<Page title={pageData.title}>
+			<PortableText value={pageData.textContent} />
 		</Page>
 	)
 }
 
-const postsQuery = groq`
-	*[_type == "post"] | order(_createdAt desc) {
-		title,
-		_createdAt,
-	}
-`
 const pageQuery = groq`
-	*[_type == "page" && slug.current == "homepage"] {
+	*[_type == "page" && slug.current == "/"] {
 		title,
 		_createdAt,
 		mainImage,
@@ -31,11 +21,9 @@ const pageQuery = groq`
 `
 
 export async function getStaticProps() {
-	const posts = await client.fetch(postsQuery)
 	const pageData = await client.fetch(pageQuery)
 	return {
 		props: {
-			posts,
 			pageData: pageData[0],
 		},
 		revalidate: 60,
