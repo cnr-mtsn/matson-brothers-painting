@@ -8,7 +8,7 @@ export default function MyImage({ src }) {
 
 	return (
 		<StyledMyImage className="image">
-			<Image {...imageProps} layout="fill" objectFit="contain" />
+			<Image {...imageProps} layout="responsive" objectFit="contain" />
 		</StyledMyImage>
 	)
 }
