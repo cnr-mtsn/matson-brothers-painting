@@ -7,15 +7,17 @@ import tw, { styled } from "twin.macro"
 
 export default function Slug({ job }) {
 	return (
-		<Page>
-			<div tw="flex items-center gap-6">
-				{/* {job.mainImage && <MyImage src={job.mainImage} />} */}
-				<div tw="flex flex-col w-1/2 gap-4">
-					<h1 tw="text-lg font-bold">{job.title}</h1>
-					<MyPortableText content={job.body} />
+		job && (
+			<Page>
+				<div tw="flex items-center gap-6">
+					{job.mainImage && <MyImage src={job.mainImage} />}
+					<div tw="flex flex-col w-1/2 gap-4">
+						<h1 tw="text-lg font-bold">{job.title}</h1>
+						<MyPortableText content={job.body} />
+					</div>
 				</div>
-			</div>
-		</Page>
+			</Page>
+		)
 	)
 }
 
