@@ -1,12 +1,22 @@
 import Page from "components/Page"
 import client from "@lib/sanity"
 import { groq } from "next-sanity"
-import { PortableText } from "@portabletext/react"
+import MyPortableText from "components/MyPortableText"
+import MyImage from "components/MyImage"
+import tw, { styled } from "twin.macro"
 
 export default function Slug({ job }) {
-	console.log("Job: ", job)
-
-	return <Page>Job page</Page>
+	return (
+		<Page>
+			<div tw="flex items-center gap-6">
+				<MyImage src={job.mainImage} />
+				<div tw="flex flex-col w-1/2 gap-4">
+					<h1 tw="text-lg font-bold">{job.title}</h1>
+					<MyPortableText content={job.body} />
+				</div>
+			</div>
+		</Page>
+	)
 }
 
 export async function getStaticPaths() {
@@ -20,13 +30,15 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-	const post = await client.fetch(
-		groq`*[_type == "post" && slug.current == $slug][0]`,
+	const job = await client.fetch(
+		groq`*[_type == "job" && slug.current == $slug][0]`,
 		{ slug: params.slug }
 	)
+
+	console.log("Params: ", params)
 	return {
 		props: {
-			post,
+			job,
 		},
 		revalidate: 60,
 	}

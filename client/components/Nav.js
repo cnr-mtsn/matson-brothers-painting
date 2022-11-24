@@ -1,54 +1,53 @@
 import tw, { styled } from "twin.macro"
-import { useState, useEffect } from "react"
-import Link from "next/link"
+import { useState } from "react"
 import { useRouter } from "next/router"
 import HamburgerIcon from "./icons/HamburgerIcon"
 import CloseIcon from "./icons/CloseIcon"
+import { navigation } from "@lib/utils"
 
 export default function Nav() {
-	const [pages, setPages] = useState([])
 	const [isOpen, setIsOpen] = useState(false)
 
 	const { pathname } = useRouter()
 
-	useEffect(() => {
-		fetch("/api/pages")
-			.then(res => res.json())
-			.then(data => {
-				setPages(data)
-			})
-			.catch(err => console.log(err))
-	}, [])
+	// useEffect(() => {
+	// 	console.count("Nav useEffect ran!")
+	// 	fetch("/api/pages")
+	// 		.then(res => res.json())
+	// 		.then(data => {
+	// 			setPages(data)
+	// 		})
+	// 		.catch(err => console.log(err))
+	// }, [])
 
-	const Icon = isOpen ? <CloseIcon /> : <HamburgerIcon />
 	const NavButton = () => (
 		<button className="close-button" onClick={() => setIsOpen(!isOpen)}>
-			{Icon}
+			{isOpen ? <CloseIcon /> : <HamburgerIcon />}
 		</button>
 	)
+
+	const NavPages = () =>
+		navigation.pages
+			.filter(({ path }) => path !== "/")
+			.map(({ path, title }) => (
+				<a
+					key={title}
+					href={path}
+					className={pathname === path ? "active" : null}>
+					{title}
+				</a>
+			))
 
 	return (
 		<StyledNav open={isOpen}>
 			<NavButton />
-			{pages?.map(
-				({ title, slug }) =>
-					slug.current !== "/" && (
-						<a
-							key={title}
-							href={slug.current}
-							className={
-								pathname === slug.current ? "active" : null
-							}>
-							{title}
-						</a>
-					)
-			)}
+			<NavPages />
 		</StyledNav>
 	)
 }
 const StyledNav = styled.nav`
 	${tw`
-        fixed top-0 bottom-0
+        fixed top-0 bottom-0 z-10
         pt-20 md:pt-0
         bg-white dark:bg-black
         flex flex-col border-l-2 shadow-xl
@@ -69,7 +68,6 @@ const StyledNav = styled.nav`
 			hover:bg-gray-100 dark:hover:bg-gray-600 
             cursor-pointer 
             transition-all duration-300 ease-in-out
-			text-gray-900 dark:text-gray-100
         `}
 		&.active {
 			${tw`border-b-2 border-gray-600`}

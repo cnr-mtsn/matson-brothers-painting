@@ -17,6 +17,9 @@ function MyApp({ Component, pageProps }) {
 
 const StyledApp = styled.div`
 	${tw`bg-white dark:bg-black min-h-screen`}
+	* {
+		${tw`box-border text-black dark:text-white`}
+	}
 `
 
 export default MyApp

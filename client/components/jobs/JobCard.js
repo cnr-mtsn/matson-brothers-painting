@@ -2,29 +2,22 @@ import Image from "next/image"
 import tw, { styled } from "twin.macro"
 import { useNextSanityImage } from "next-sanity-image"
 import client from "@lib/sanity"
+import Link from "next/link"
+import MyImage from "components/MyImage"
 
 export default function JobCard({ job }) {
-	console.log(`Job: ${JSON.stringify(job, null, 2)}`)
 	const imageProps = useNextSanityImage(client, job?.mainImage)
 
-	const JobImage = () => (
-		<div className="image">
-			<Image {...imageProps} layout="fill" />
-		</div>
-	)
 	return (
-		<StyledJobCard>
+		<StyledJobCard href={`/jobs/${job.slug.current}`}>
 			<h1>{job.title}</h1>
-			<JobImage />
+			<MyImage src={job.mainImage} />
 		</StyledJobCard>
 	)
 }
-const StyledJobCard = styled.div`
-	${tw`shadow-md rounded-md p-4 border w-max`}
+const StyledJobCard = styled.a`
+	${tw`shadow-md border flex flex-col p-2 items-center`}
 	h1 {
-		${tw`text-2xl dark:text-white text-center pb-2`}
-	}
-	.image {
-		${tw`relative w-80 h-52`};
+		${tw`text-2xl text-center pb-2`}
 	}
 `

@@ -5,7 +5,4 @@ export default function Page({ children, title }) {
 }
 const StyledPage = styled.div`
 	${tw`p-10`}
-	p {
-		${tw`text-gray-900 dark:text-gray-100`}
-	}
 `

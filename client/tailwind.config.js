@@ -1,6 +1,6 @@
 module.exports = {
 	purge: [],
-	darkMode: "media", // or 'media' or 'class'
+	darkMode: process.env.NODE_ENV === "development" ? "class" : "media", // or 'media' or 'class'
 	theme: {
 		extend: {},
 	},

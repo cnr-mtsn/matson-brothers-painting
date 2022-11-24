@@ -1,13 +1,9 @@
 import { groq } from "next-sanity"
 import Page from "components/Page"
 import client from "@lib/sanity"
-import tw from "twin.macro"
-import Image from "next/image"
-import { useNextSanityImage } from "next-sanity-image"
 import JobCard from "components/jobs/JobCard"
 
 export default function AllJobs({ jobs }) {
-	console.log("Jobs: ", jobs)
 	return (
 		<Page>
 			{jobs?.map(job => (
