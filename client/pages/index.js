@@ -41,7 +41,7 @@ const StyledHomePageContent = styled.div`
 		${tw`text-center text-lg md:text-xl`}
 	}
 	.contact-info {
-		${tw`mt-6 bg-gray-200 dark:bg-gray-800 p-4 rounded-md`}
+		${tw`mt-6 bg-gray-200 dark:bg-gray-800 p-4 rounded-md text-left`}
 	}
 `
 
