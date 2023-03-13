@@ -21,6 +21,14 @@ export default {
 				hotspot: true,
 			},
 		},
+		// meta description
+		{
+			name: "description",
+			title: "Description",
+			type: "text",
+			description:
+				"Describe your site for search engines and social media.",
+		},
 		{
 			name: "email",
 			title: "Email",

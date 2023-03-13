@@ -7,11 +7,11 @@ export default function Header() {
 
 	return (
 		<StyledHeader>
-			<Logo size="sm" />
-			<Nav />
+			<Logo size="lg" />
+			{/* <Nav /> */}
 		</StyledHeader>
 	)
 }
 const StyledHeader = styled.header`
-	${tw`flex justify-between items-end`}
+	${tw`flex justify-center items-center my-4`}
 `

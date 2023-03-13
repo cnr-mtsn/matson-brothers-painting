@@ -20,6 +20,7 @@
 	},
 	"homepage": "https://github.com/cnr-mtsn/matson-brothers-painting#readme",
 	"dependencies": {
-		"concurrently": "^7.3.0"
+		"concurrently": "^7.3.0",
+		"stripe": "^11.10.0"
 	}
 }

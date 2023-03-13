@@ -1,7 +1,7 @@
 export const navigation = {
 	pages: [
 		{ title: "Home", path: "/" },
-		{ title: "Jobs", path: "/jobs" },
+		{ title: "Pay", path: "/pay" },
 		{ title: "About", path: "/about" },
 		{ title: "Contact", path: "/contact" },
 	],
