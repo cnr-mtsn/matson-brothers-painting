@@ -13,5 +13,5 @@ export default function Header() {
 	)
 }
 const StyledHeader = styled.header`
-	${tw`flex justify-center items-center my-4`}
+	${tw`flex justify-center items-center py-4`}
 `
