@@ -27,6 +27,10 @@ export default class MyDocument extends Document {
 						data-emotion-css={this.props.ids?.join(" ")}
 						dangerouslySetInnerHTML={{ __html: this.props.css }}
 					/>
+					<meta
+						name="google-site-verification"
+						content="iEWn6sJWNp0ATlBvKdkkTZUlLhFUqmjUf--xmLSyW54"
+					/>
 				</Head>
 				<body>
 					<Main />
