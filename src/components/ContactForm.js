@@ -40,6 +40,12 @@ function ContactForm() {
 				setFormData(initialFormData)
 				const data = await response.json()
 				setResponse(data)
+			} else {
+				setLoading(false)
+				setSubmitted(true)
+				setResponse({
+					message: "There was a problem sending your message.",
+				})
 			}
 		} catch (error) {
 			console.log("Error: ", error)
