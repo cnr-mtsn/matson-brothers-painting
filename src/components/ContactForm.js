@@ -49,16 +49,11 @@ function ContactForm() {
 
 	return (
 		<div className="border-t-2 border-b-2 border-brand-red py-6 px-4 rounded-sm w-full lg:w-1/3 rounded-md">
-			{loading ||
-				(submitted && (
-					<p className="text-white text-center">
-						{loading
-							? "Sending..."
-							: submitted
-							? response.message
-							: ""}
-					</p>
-				))}
+			{(loading || submitted) && (
+				<p className="text-white text-center">
+					{loading ? "Sending..." : submitted ? response.message : ""}
+				</p>
+			)}
 			{!loading && !submitted && (
 				<form
 					className="flex flex-col gap-4"
