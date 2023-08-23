@@ -22,7 +22,7 @@ body {
 	@apply font-[Oswald] tracking-wide text-lg;
 }
 main {
-	@apply min-h-[90vh];
+	@apply min-h-[90vh] p-8;
 }
 header {
 	@apply p-8 flex items-center justify-between h-[10vh];
