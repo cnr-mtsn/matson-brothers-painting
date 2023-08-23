@@ -22,10 +22,10 @@ body {
 	@apply font-[Oswald] tracking-wide text-lg;
 }
 main {
-	@apply min-h-[95vh];
+	@apply min-h-[90vh];
 }
 header {
-	@apply p-8 flex items-center justify-between h-[5vh];
+	@apply p-8 flex items-center justify-between h-[10vh];
 }
 nav {
 	@apply flex gap-4 items-center;
@@ -34,5 +34,5 @@ img[src$=".svg"] {
 	@apply dark:invert;
 }
 .header-link {
-	@apply hover:bg-stone-400 dark:hover:bg-stone-800 p-2 transition-all duration-300 rounded-sm;
+	@apply hover:bg-brand-red hover:bg-opacity-20 dark:hover:bg-stone-800 p-2 transition-all duration-300 rounded-sm;
 }

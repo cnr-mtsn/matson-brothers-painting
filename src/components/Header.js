@@ -10,7 +10,12 @@ function Header() {
 	]
 	return (
 		<header>
-			<h1 className="logo text-2xl">Sims Custom Homes</h1>
+			<Image
+				src="/logos/logo-no-bg.png"
+				width={180}
+				height={60}
+				alt={siteData.name}
+			/>
 			<div className="flex gap-4">
 				<nav>
 					{/* {['Home', 'About','Contact'].map((page) => <Link className="header-link" key={page} href={`/${page === 'Home' ? "/" : page.toLowerCase()}`}>{page}</Link>)} */}

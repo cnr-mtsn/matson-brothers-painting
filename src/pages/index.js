@@ -7,9 +7,9 @@ export default function Home() {
 			<div className="flex flex-col gap-10 items-center justify-center w-full lg:w-1/2 text-center">
 				<h1 className="text-white text-5xl leading-[4rem]">
 					Crafting Dreams, Building Homes: Where{" "}
-					<span className="text-blue-400 underline">Vision</span>{" "}
+					<span className="text-brand-red underline">Vision</span>{" "}
 					Becomes{" "}
-					<span className="text-blue-400 underline">Reality</span>
+					<span className="text-brand-red underline">Reality</span>
 				</h1>
 				<p className="text-2xl text-gray-100">{siteData.description}</p>
 			</div>
