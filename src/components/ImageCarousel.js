@@ -1,8 +1,15 @@
 import Image from "next/image"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 
 const ImageCarousel = ({ images, height }) => {
 	const [currentIndex, setCurrentIndex] = useState(0)
+
+	useEffect(() => {
+		// Preload the next image for smoother transitions
+		const nextIndex = (currentIndex + 1) % images.length
+		const image = new Image()
+		image.src = `/images/photo-${nextIndex + 1}.jpg`
+	}, [currentIndex, images])
 
 	const prevSlide = () => {
 		const lastIndex = images.length - 1
@@ -21,7 +28,7 @@ const ImageCarousel = ({ images, height }) => {
 					objectFit="cover"
 					alt="Carousel Image"
 					src={`/images/photo-${currentIndex + 1}.jpg`}
-					className={`transition-transform duration-500`}
+					className="transition-transform duration-500"
 				/>
 			</div>
 			<button
@@ -35,7 +42,6 @@ const ImageCarousel = ({ images, height }) => {
 					alt="Previous Slide"
 				/>
 			</button>
-
 			<button
 				onClick={nextSlide}
 				className="absolute top-1/2 right-2 bg-white dark:bg-black p-2 rounded-full hover:brightness-90 dark:hover:bg-stone-800 transition-all duration-300 ease-in-out"
