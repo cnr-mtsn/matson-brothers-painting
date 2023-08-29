@@ -24,22 +24,25 @@ const ImageCarousel = ({ images, height }) => {
 					layout="fill"
 					objectFit="cover"
 					alt="Carousel Image"
+					priority
 					src={`/images/photo-${currentIndex + 1}.jpg`}
 					className="transition-transform duration-500"
 				/>
 			</div>
 			{/* Hidden preloading for the next and previous images */}
-			<div style={{ display: "none" }}>
+			<div className="hidden">
 				<Image
 					layout="fill"
 					objectFit="cover"
 					alt="Preloading Next Image"
+					priority
 					src={`/images/photo-${nextImageIndex + 1}.jpg`}
 				/>
 				<Image
 					layout="fill"
 					objectFit="cover"
 					alt="Preloading Previous Image"
+					priority
 					src={`/images/photo-${prevImageIndex + 1}.jpg`}
 				/>
 			</div>
