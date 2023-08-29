@@ -3,7 +3,7 @@ import Image from "next/image"
 
 const Footer = () => {
 	return (
-		<footer className="px-6 py-10 flex flex-col gap-8 items-center justify-center">
+		<footer className="px-6 py-10">
 			<div className="max-w-7xl mx-auto">
 				<div className="flex flex-col lg:flex-row gap-6 lg:gap-10 items-center justify-center">
 					<div className="flex items-center gap-2 mb-2 lg:mb-0 lg:mr-4">
@@ -22,7 +22,12 @@ const Footer = () => {
 						</a>
 					</div>
 					<div className="border border-black dark:border-white h-[.3px] w-3/4 lg:w-40" />
-					<h3 className="text-2xl">{siteData.name}</h3>
+					<Image
+						src="/logos/logo-dark-bg.png"
+						width={180}
+						height={60}
+						alt="Sims Custom Homes Inc."
+					/>
 					<div className="border border-black dark:border-white h-[.3px] w-3/4 lg:w-40" />
 					<div className="flex items-center gap-2">
 						<Image
@@ -41,12 +46,6 @@ const Footer = () => {
 					</div>
 				</div>
 			</div>
-			<Image
-				src="/logos/logo-dark-bg.png"
-				width={180}
-				height={60}
-				alt="Sims Custom Homes Inc."
-			/>
 		</footer>
 	)
 }
