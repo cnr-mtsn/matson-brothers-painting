@@ -13,7 +13,10 @@ const Footer = () => {
 							height={25}
 							alt="Phone"
 						/>
-						{siteData.phone}
+						<a
+							className="decoration-none"
+							href="tel:{siteData.phone}"
+						></a>
 					</div>
 					<div className="border border-black dark:border-white h-[.3px] w-3/4 lg:w-40" />
 					<h3 className="text-2xl">{siteData.name}</h3>
@@ -25,7 +28,10 @@ const Footer = () => {
 							height={25}
 							alt="Email"
 						/>
-						{siteData.email}
+						<a
+							className="decoration-none"
+							href="mailto:{siteData.email}"
+						></a>
 					</div>
 				</div>
 			</div>
