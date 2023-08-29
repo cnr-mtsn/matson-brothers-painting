@@ -15,8 +15,11 @@ const Footer = () => {
 						/>
 						<a
 							className="decoration-none"
-							href="tel:{siteData.phone}"
-						></a>
+							href={`tel:${siteData.phone}`}
+							title={`Call us at ${siteData.phone}`}
+						>
+							{siteData.phone}
+						</a>
 					</div>
 					<div className="border border-black dark:border-white h-[.3px] w-3/4 lg:w-40" />
 					<h3 className="text-2xl">{siteData.name}</h3>
@@ -30,8 +33,11 @@ const Footer = () => {
 						/>
 						<a
 							className="decoration-none"
-							href="mailto:{siteData.email}"
-						></a>
+							href={`mailto:${siteData.email}`}
+							title={`Email us at ${siteData.email}`}
+						>
+							{siteData.email}
+						</a>
 					</div>
 				</div>
 			</div>
