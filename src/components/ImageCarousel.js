@@ -13,6 +13,10 @@ const ImageCarousel = ({ images, height }) => {
 		setCurrentIndex((currentIndex + 1) % images.length)
 	}
 
+	const nextImageIndex = (currentIndex + 1) % images.length
+	const prevImageIndex =
+		currentIndex === 0 ? images.length - 1 : currentIndex - 1
+
 	return (
 		<div className="relative overflow-hidden bg-gray-100 w-full h-auto">
 			<div className={`relative h-80 lg:h-[600px]`}>
@@ -21,7 +25,22 @@ const ImageCarousel = ({ images, height }) => {
 					objectFit="cover"
 					alt="Carousel Image"
 					src={`/images/photo-${currentIndex + 1}.jpg`}
-					className={`transition-transform duration-500`}
+					className="transition-transform duration-500"
+				/>
+			</div>
+			{/* Hidden preloading for the next and previous images */}
+			<div style={{ display: "none" }}>
+				<Image
+					layout="fill"
+					objectFit="cover"
+					alt="Preloading Next Image"
+					src={`/images/photo-${nextImageIndex + 1}.jpg`}
+				/>
+				<Image
+					layout="fill"
+					objectFit="cover"
+					alt="Preloading Previous Image"
+					src={`/images/photo-${prevImageIndex + 1}.jpg`}
 				/>
 			</div>
 			<button
@@ -35,7 +54,6 @@ const ImageCarousel = ({ images, height }) => {
 					alt="Previous Slide"
 				/>
 			</button>
-
 			<button
 				onClick={nextSlide}
 				className="absolute top-1/2 right-2 bg-white dark:bg-black p-2 rounded-full hover:brightness-90 dark:hover:bg-stone-800 transition-all duration-300 ease-in-out"
