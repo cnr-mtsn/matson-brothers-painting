@@ -101,7 +101,7 @@ function ContactForm() {
 					<input
 						type="submit"
 						value="Send"
-						className="w-auto mx-auto bg-brand-blue text-white dark:bg-brand-red py-2 px-20 rounded-sm hover:brightness-110 cursor-pointer transition-all duration-300 ease-in-out"
+						className="w-auto mx-auto text-white bg-brand-red py-2 px-20 rounded-sm hover:brightness-110 cursor-pointer transition-all duration-300 ease-in-out"
 					/>
 				</form>
 			)}

@@ -1,34 +1,54 @@
-'use client'
-import React, { useState } from 'react'
-import Image from 'next/image'
-import '../app/styles/carousel.css'
+import Image from "next/image"
+import React, { useState } from "react"
 
-function ImageCarousel() {
-    const [currentImage, setCurrentImage] = useState(1) 
-    const maxImages = 66;
+const ImageCarousel = ({ images, height }) => {
+	const [currentIndex, setCurrentIndex] = useState(0)
 
-    const previousImage = () => {
-        if (currentImage === 1) setCurrentImage(maxImages)
-        else setCurrentImage(currentImage - 1)
-    }
-    const nextImage = () => {
-        if (currentImage === maxImages) setCurrentImage(1)
-        else setCurrentImage(currentImage + 1)
-    }
+	const prevSlide = () => {
+		const lastIndex = images.length - 1
+		setCurrentIndex(currentIndex === 0 ? lastIndex : currentIndex - 1)
+	}
 
-    return (
-        <div className="carousel">
-            <button className="previous" onClick={previousImage}>
-                <Image src="chevron-left.svg" width={25} height={25} alt="previous" />
-            </button>
-            <div className="images">
-                <Image src={`/images/photo-${currentImage}.jpg`} width={600} height={400} alt={`photo-${currentImage}`} />
-            </div>
-            <button className="next" onClick={nextImage}>
-                <Image src="chevron-right.svg" width={25} height={25} alt="forward" />
-            </button>
-        </div>
-    )
+	const nextSlide = () => {
+		setCurrentIndex((currentIndex + 1) % images.length)
+	}
+
+	return (
+		<div className="relative overflow-hidden bg-gray-100 w-full h-auto">
+			<div className={`relative h-80 lg:h-[600px]`}>
+				<Image
+					layout="fill"
+					objectFit="cover"
+					alt="Carousel Image"
+					src={`/images/photo-${currentIndex + 1}.jpg`}
+					className={`transition-transform duration-500`}
+				/>
+			</div>
+			<button
+				onClick={prevSlide}
+				className="absolute top-1/2 left-2 bg-white dark:bg-black p-2 rounded-full hover:brightness-90 dark:hover:bg-stone-800 transition-all duration-300 ease-in-out"
+			>
+				<Image
+					height={16}
+					width={16}
+					src="/svg/chevron-left.svg"
+					alt="Previous Slide"
+				/>
+			</button>
+
+			<button
+				onClick={nextSlide}
+				className="absolute top-1/2 right-2 bg-white dark:bg-black p-2 rounded-full hover:brightness-90 dark:hover:bg-stone-800 transition-all duration-300 ease-in-out"
+			>
+				<Image
+					height={16}
+					width={16}
+					src="/svg/chevron-right.svg"
+					alt="Next Slide"
+				/>
+			</button>
+		</div>
+	)
 }
 
 export default ImageCarousel

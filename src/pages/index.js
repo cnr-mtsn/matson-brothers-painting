@@ -1,19 +1,25 @@
+import Hero from "@/components/Hero"
 import ContactForm from "../components/ContactForm"
-import { siteData } from "../data/siteData"
+import ImageCarousel from "@/components/ImageCarousel"
 
 export default function Home() {
+	// create an array of image urls from photo-1.jpg to photo-58.jpg
+	const images = Array.from(
+		{ length: 58 },
+		(_, i) => `/images/photo-${i + 1}.jpg`
+	)
 	return (
-		<main className="bg-[url('/images/landing-page.jpg')] bg-no-repeat bg-cover bg-blend-overlay bg-black bg-opacity-70 flex flex-col lg:flex-row items-center justify-around gap-4 p-8">
-			<div className="flex flex-col gap-10 items-center justify-center w-full lg:w-1/2 text-center">
-				<h1 className="text-white text-5xl leading-[4rem]">
-					Crafting Dreams, Building Homes: Where{" "}
-					<span className="text-brand-red underline">Vision</span>{" "}
-					Becomes{" "}
-					<span className="text-brand-red underline">Reality</span>
-				</h1>
-				<p className="text-2xl text-gray-100">{siteData.description}</p>
+		<div className="flex flex-col justify-center p-8 min-h-[90vh]">
+			<div className="flex flex-col lg:flex-row items-center justify-center w-full sm:w-[85%] mx-auto min-h-[60vh] gap-8 bg-black bg-opacity-20 dark:bg-opacity-0 p-10 lg:mt-16">
+				<Hero className="flex flex-col gap-10 items-center justify-center w-full lg:w-1/2 text-center" />
+				<ContactForm />
 			</div>
-			<ContactForm />
-		</main>
+			<div className="flex flex-col justify-center gap-6 w-full md:w-[80%] mx-auto mt-20">
+				<h2 className="w-full border-b-2 border-white text-3xl text-white pb-4">
+					Some of our work
+				</h2>
+				<ImageCarousel images={images} height={96} />
+			</div>
+		</div>
 	)
 }
