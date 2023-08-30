@@ -36,5 +36,5 @@ img[src$=".svg"] {
 	@apply dark:invert;
 }
 .header-link {
-	@apply hover:bg-brand-red hover:bg-opacity-20 dark:hover:bg-stone-800 p-2 transition-all duration-300 rounded-sm;
+	@apply hover:bg-brand-blue hover:bg-opacity-20 dark:hover:bg-stone-800 p-2 transition-all duration-300 rounded-sm;
 }

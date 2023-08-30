@@ -23,7 +23,7 @@ const Footer = () => {
 					</div>
 					<div className="border border-black dark:border-white h-[.1px] w-3/4 lg:w-40" />
 					<Image
-						src="/logos/logo-dark-bg.png"
+						src="/logos/logo-long-no-bg.png"
 						width={180}
 						height={60}
 						alt="Sims Custom Homes Inc."

@@ -1,10 +1,10 @@
 export const siteData = {
-	name: "Sims Custom Homes",
-	slogan: "Crafting Dreams, Building Homes: Where Vision Becomes Reality",
+	name: "Matson Brothers Painting, LLC",
+	slogan: "Matson Brothers Painting: Legacy in Every Brushstroke.",
 	ctaText:
-		"Transforming Visions into Exquisite Homes: Your Dream, Our Expertise. Build Your Future with Sims Custom Homes Today!",
+		"Transform your home with a legacy of excellence. Book our experts today!",
 	description:
-		"With over 20 years of experience in the construction industry, I've had the privilege of contributing to the creation of 21 distinctive homes. Guiding clients through the journey of turning their visions into reality and seeing those dreams materialize is what truly fuels my passion. Now, I'm excited to take the next step and fully commit to the realm of new home construction. This transition marks not just a professional move, but a dedication to bringing more dream homes to life.",
-	phone: "(816) 838-0194",
-	email: "sales@srckc.com",
+		"Welcome to Matson Brothers Painting, LLC – your trusted partner in bringing color and elegance to homes in Oak Grove, MO, since 1987. Founded by the late George Clarence Matson III, our company now proudly upholds a legacy that blends time-honored traditions with modern innovation. We offer full service new home painting and repaints. With a team boasting over 25 years of experience, we don't just paint homes – we craft lasting impressions. Let the Matson legacy make a mark on your home's beauty.",
+	phone: "(816) 442-9156",
+	email: "matsonbrotherspainting@gmail.com",
 }

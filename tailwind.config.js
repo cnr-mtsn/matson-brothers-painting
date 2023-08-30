@@ -12,8 +12,7 @@ module.exports = {
 				primary: ["Oswald", "sans-serif"],
 			},
 			colors: {
-				"brand-red": "#B01F22",
-				"brand-blue": "#202246",
+				"brand-blue": "#9AB3CF",
 			},
 		},
 	},
