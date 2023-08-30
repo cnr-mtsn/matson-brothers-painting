@@ -21,14 +21,14 @@ const Footer = () => {
 							{siteData.phone}
 						</a>
 					</div>
-					<div className="border border-black dark:border-white h-[.3px] w-3/4 lg:w-40" />
+					<div className="border border-black dark:border-white h-[.1px] w-3/4 lg:w-40" />
 					<Image
 						src="/logos/logo-dark-bg.png"
 						width={180}
 						height={60}
 						alt="Sims Custom Homes Inc."
 					/>
-					<div className="border border-black dark:border-white h-[.3px] w-3/4 lg:w-40" />
+					<div className="border border-black dark:border-white h-[.1px] w-3/4 lg:w-40" />
 					<div className="flex items-center gap-2">
 						<Image
 							src={`email.svg`}
