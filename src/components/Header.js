@@ -11,10 +11,11 @@ function Header() {
 	return (
 		<header>
 			<Image
-				src="/logos/logo-no-bg.png"
-				width={180}
-				height={60}
+				src="/logos/logo-long-no-bg.png"
+				width={300}
+				height={80}
 				alt={siteData.name}
+				className="dark:invert"
 			/>
 			<div className="flex gap-4">
 				<nav>

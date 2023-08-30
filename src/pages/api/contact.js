@@ -1,3 +1,4 @@
+import { siteData } from "@/data/siteData"
 import nodemailer from "nodemailer"
 
 export default async function handler(req, res) {
@@ -70,7 +71,7 @@ export default async function handler(req, res) {
 			`,
 		})
 		return res.status(200).json({
-			message: "Thank you for reaching out to Sims Custom Homes!",
+			message: `Thank you for reaching out to ${siteData.name}!`,
 		})
 	} catch (error) {
 		console.log("Error: ", error)

@@ -5,7 +5,14 @@ const Footer = () => {
 	return (
 		<footer className="px-6 py-10">
 			<div className="max-w-7xl mx-auto">
-				<div className="flex flex-col lg:flex-row gap-6 lg:gap-10 items-center justify-center">
+				<div className="flex flex-col gap-4 items-center justify-center">
+					<Image
+						src="/logos/logo-long-no-bg.png"
+						width={300}
+						height={80}
+						alt={siteData.name}
+						className="dark:invert"
+					/>
 					<div className="flex items-center gap-2 mb-2 lg:mb-0 lg:mr-4">
 						<Image
 							src={`/phone.svg`}
@@ -21,14 +28,9 @@ const Footer = () => {
 							{siteData.phone}
 						</a>
 					</div>
-					<div className="border border-black dark:border-white h-[.1px] w-3/4 lg:w-40" />
-					<Image
-						src="/logos/logo-long-no-bg.png"
-						width={180}
-						height={60}
-						alt="Sims Custom Homes Inc."
-					/>
-					<div className="border border-black dark:border-white h-[.1px] w-3/4 lg:w-40" />
+					{/* <div className="border border-black dark:border-white h-[.1px] w-3/4 lg:w-32" /> */}
+
+					{/* <div className="border border-black dark:border-white h-[.1px] w-3/4 lg:w-32" /> */}
 					<div className="flex items-center gap-2">
 						<Image
 							src={`email.svg`}
