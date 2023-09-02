@@ -25,7 +25,7 @@ const ImageCarousel = ({ images, height }) => {
 					objectFit="cover"
 					alt="Carousel Image"
 					priority
-					src={`/images/photo-${currentIndex + 1}.jpg`}
+					src={`/images/photo-${currentIndex + 1}.png`}
 					className="transition-transform duration-500"
 				/>
 			</div>
@@ -36,14 +36,14 @@ const ImageCarousel = ({ images, height }) => {
 					objectFit="cover"
 					alt="Preloading Next Image"
 					priority
-					src={`/images/photo-${nextImageIndex + 1}.jpg`}
+					src={`/images/photo-${nextImageIndex + 1}.png`}
 				/>
 				<Image
 					layout="fill"
 					objectFit="cover"
 					alt="Preloading Previous Image"
 					priority
-					src={`/images/photo-${prevImageIndex + 1}.jpg`}
+					src={`/images/photo-${prevImageIndex + 1}.png`}
 				/>
 			</div>
 			<button

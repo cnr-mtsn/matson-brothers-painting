@@ -5,7 +5,7 @@ import ImageCarousel from "@/components/ImageCarousel"
 export default function Home() {
 	// create an array of image urls from photo-1.jpg to photo-58.jpg
 	const images = Array.from(
-		{ length: 58 },
+		{ length: 15 },
 		(_, i) => `/images/photo-${i + 1}.jpg`
 	)
 	return (
