@@ -1,5 +1,5 @@
 {
-  "name": "Matson Brothers Painting, LLC",
+  "name": "matson-brothers-painting",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,8 +10,6 @@
   },
   "dependencies": {
     "autoprefixer": "10.4.15",
-    "eslint": "8.47.0",
-    "eslint-config-next": "13.4.19",
     "next": "13.4.19",
     "nodemailer": "^6.9.4",
     "postcss": "8.4.28",

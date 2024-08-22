@@ -27,7 +27,7 @@ main {
 	@apply min-h-[90vh];
 }
 header {
-	@apply p-2 md:p-6 flex items-center justify-between min-h-[10vh];
+	@apply p-4 flex items-center justify-between;
 }
 nav {
 	@apply flex gap-4 items-center;
