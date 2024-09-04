@@ -51,7 +51,8 @@ img.header-logo {
 	@apply dark:invert w-1/2 min-w-[200px] max-w-[250px] mx-auto transition-all duration-300 ease-in-out;
 }
 div.banner {
-	@apply flex gap-4 items-center justify-between sticky top-0 left-0 right-0 z-[500];
+	@apply flex gap-4 items-center justify-between sticky top-0 left-0 right-0;
+	z-index: 500;
 }
 img[src$=".svg"] {
 	@apply dark:invert;
