@@ -42,11 +42,11 @@ header {
 html:not([data-scroll="0"]) div.banner {
 	@apply bg-none;
 }
-@media screen and (min-width: 630px) {
+/* @media screen and (min-width: 630px) {
 	img.header-logo {
 		@apply -mt-10;
 	}
-}
+} */
 img.header-logo {
 	@apply dark:invert w-1/2 min-w-[200px] max-w-[250px] mx-auto transition-all duration-300 ease-in-out;
 }
