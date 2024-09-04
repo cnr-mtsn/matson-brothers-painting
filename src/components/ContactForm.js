@@ -50,9 +50,9 @@ function ContactForm() {
 	}
 
 	return (
-		<div className="border-t-2 border-b-2 border-brand-blue py-6 px-4 rounded-sm w-full sm:w-3/4 md:w-2/3 lg:w-1/3 rounded-md">
+		<div className="border-t-2 border-b-2 border-blue-900 py-6 px-4 rounded-sm w-full sm:w-3/4 md:w-2/3 lg:w-1/3 rounded-md">
 			{(loading || submitted) && (
-				<p className="text-white text-center">
+				<p className="text-center">
 					{loading ? "Sending..." : submitted ? response.message : ""}
 				</p>
 			)}
@@ -62,13 +62,13 @@ function ContactForm() {
 					onSubmit={handleSubmit}
 					name="Contact"
 				>
-					<h1 className="text-2xl font-bold text-white text-center">
+					<h1 className="text-2xl font-bold text-center">
 						{"Let's work together"}
 					</h1>
 					<input
 						onChange={handleInputChange}
 						required
-						className="w-auto p-2 bg-opacity-90 bg-white text-black focus:outline-brand-blue focus:outline-2 hover:bg-opacity-90 transition-all duration-300 ease-in-out"
+						className="w-auto p-2 focus:pl-6 bg-opacity-90 bg-white text-gray-400 focus:text-black focus:outline-none dark:text-gray-400 dark:focus:text-white bg-gray-200 dark:bg-stone-800 focus:bg-white dark:focus:bg-gray-700 hover:bg-opacity-90 transition-all duration-300 ease-in-out"
 						type="text"
 						name="name"
 						id="name"
@@ -79,7 +79,7 @@ function ContactForm() {
 					<input
 						onChange={handleInputChange}
 						required
-						className="w-auto p-2 bg-opacity-90 bg-white text-black focus:outline-brand-blue focus:outline-2 hover:bg-opacity-90 transition-all duration-300 ease-in-out"
+						className="w-auto p-2 focus:pl-6 bg-opacity-90 bg-white text-gray-400 focus:text-black focus:outline-none dark:text-gray-400 dark:focus:text-white bg-gray-200 dark:bg-stone-800 focus:bg-white dark:focus:bg-gray-700 hover:bg-opacity-90 transition-all duration-300 ease-in-out"
 						type="email"
 						name="email"
 						id="email"
@@ -90,7 +90,7 @@ function ContactForm() {
 					<textarea
 						onChange={handleInputChange}
 						required
-						className="w-auto p-2 bg-opacity-90 bg-white text-black focus:outline-brand-blue focus:outline-2 hover:bg-opacity-90 transition-all duration-300 ease-in-out"
+						className="w-auto p-2 focus:pl-6 bg-opacity-90 bg-white text-gray-400 focus:text-black focus:outline-none dark:text-gray-400 dark:focus:text-white bg-gray-200 dark:bg-stone-800 focus:bg-white dark:focus:bg-gray-700 hover:bg-opacity-90 transition-all duration-300 ease-in-out"
 						name="message"
 						id="message"
 						placeholder={
@@ -101,7 +101,7 @@ function ContactForm() {
 					<input
 						type="submit"
 						value="Send"
-						className="w-auto mx-auto text-white bg-brand-blue py-2 px-20 rounded-sm hover:brightness-110 cursor-pointer transition-all duration-300 ease-in-out"
+						className="w-auto mx-auto text-gray-400 focus:text-black dark:text-gray-400 dark:focus:text-white focus:outline-none dark:focus:bg-gray-700 dark:text-gray-400 bg-gray-200 focus:bg-white dark:bg-stone-800 py-2 px-20 rounded-sm hover:brightness-110 cursor-pointer transition-all duration-300 ease-in-out"
 					/>
 				</form>
 			)}

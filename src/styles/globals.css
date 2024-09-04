@@ -18,23 +18,44 @@
 * {
 	@apply text-black dark:text-white;
 }
+
+html {
+	@apply bg-repeat;
+	background-image: url("/public/images/grunge-wall.png");
+}
+@media (prefers-color-scheme: dark) {
+	html {
+		background-image: url("/public/images/dark-exa.png");
+	}
+}
 body {
 	color: rgb(var(--foreground-rgb));
-	background: rgb(var(--background-rgb));
-	@apply font-[Oswald] tracking-wide text-lg;
+	@apply font-[Oswald] text-lg;
 }
 main {
 	@apply min-h-[90vh];
 }
 header {
-	@apply p-4 flex items-center justify-between;
+	@apply px-6 py-4 flex flex-col;
+	z-index: 500;
 }
-nav {
-	@apply flex gap-4 items-center;
+html:not([data-scroll="0"]) div.banner {
+	@apply bg-none;
+}
+@media screen and (min-width: 630px) {
+	img.header-logo {
+		@apply -mt-10;
+	}
+}
+img.header-logo {
+	@apply dark:invert w-1/2 min-w-[200px] max-w-[250px] mx-auto transition-all duration-300 ease-in-out;
+}
+div.banner {
+	@apply flex gap-4 items-center justify-between sticky top-0 left-0 right-0;
 }
 img[src$=".svg"] {
 	@apply dark:invert;
 }
 .header-link {
-	@apply hover:bg-brand-blue hover:bg-opacity-20 dark:hover:bg-stone-800 p-2 transition-all duration-300 rounded-sm;
+	@apply hover:bg-brand-blue hover:bg-opacity-20 dark:hover:bg-stone-800 p-2 transition-all duration-300 flex gap-2 items-center uppercase h-12;
 }
