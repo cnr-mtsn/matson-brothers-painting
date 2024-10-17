@@ -15,7 +15,7 @@ export default function App({ Component, pageProps }) {
 				<link rel="icon" href="/favicons/favicon.ico" />
 			</Head>
 			{/* <div className="min-h-[90vh] bg-[url('/images/photo-16.png')] bg-no-repeat bg-cover bg-blend-overlay bg-black bg-opacity-50 dark:bg-opacity-70"> */}
-			<div className="min-h-[90vh]">
+			<div className="">
 				<Component {...pageProps} />
 			</div>
 		</main>

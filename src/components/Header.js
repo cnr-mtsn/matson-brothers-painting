@@ -1,13 +1,16 @@
+import Link from "next/link"
 import { siteData } from "../data/siteData"
 
 function Header() {
 	return (
 		<header>
-			<img
-				src="/logos/light-logo-no-bg.png"
-				alt={siteData.name}
-				className="header-logo"
-			/>
+			<Link href="/">
+				<img
+					src="/logos/light-logo-no-bg.png"
+					alt={siteData.name}
+					className="header-logo"
+				/>
+			</Link>
 		</header>
 	)
 }

@@ -9,8 +9,8 @@ export default function Home() {
 		(_, i) => `/images/photo-${i + 1}.jpg`
 	)
 	return (
-		<div className="flex flex-col justify-center p-4 md:p-8 min-h-[90vh] w-full md:w-[90%] mx-auto">
-			<div className="flex flex-col lg:flex-row items-center justify-center min-h-[60vh] gap-8 bg-black bg-opacity-20 dark:bg-opacity-0 py-6 lg:mt-16">
+		<div className="flex flex-col justify-center p-4 md:p-8 w-full md:w-[90%] mx-auto">
+			<div className="flex flex-col lg:flex-row items-center justify-center gap-8 bg-black bg-opacity-20 dark:bg-opacity-0 py-6 lg:mt-16">
 				<Hero className="flex flex-col gap-10 items-center justify-center text-center w-full sm:w-3/4 md:w-2/3 lg:w-1/2" />
 				<ContactForm />
 			</div>
