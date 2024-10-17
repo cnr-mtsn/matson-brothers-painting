@@ -3,7 +3,7 @@ import { Elements } from "@stripe/react-stripe-js"
 import { useState } from "react"
 import PaymentForm from "@/components/PaymentForm"
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY_TEST)
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY)
 
 export default function OnlinePayment() {
 	const [amount, setAmount] = useState("0.00")

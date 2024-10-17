@@ -1,7 +1,7 @@
 import Stripe from "stripe"
 
 export default async function handler(req, res) {
-	const stripe = new Stripe(process.env.STRIPE_SECRET_KEY_TEST, {
+	const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 		apiVersion: "2024-09-30.acacia",
 	})
 	console.log("New payment request: ", req.body)
