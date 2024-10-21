@@ -58,7 +58,7 @@ const PaymentForm = ({ currency, totalAmount }) => {
 	return (
 		<form
 			onSubmit={handleSubmit}
-			className="flex flex-col items-center bg-stone-200 dark:bg-stone-800 w-max p-10 mx-auto rounded-xl"
+			className="flex flex-col items-center bg-stone-200 dark:bg-stone-800 w-max p-10 mx-auto lg:m-0 rounded-xl"
 		>
 			<PaymentElement />
 			<button

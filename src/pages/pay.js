@@ -29,9 +29,9 @@ export default function OnlinePayment() {
 	const centsToDollars = amount => amount / 100
 
 	return (
-		<section className="payment-page-container p-10 flex flex-col md:flex-row gap-8 bg-white dark:bg-opacity-10 mx-auto w-auto max-w-[95vw] rounded">
-			<div className="flex flex-col justify-between py-10">
-				<div className="flex items-center gap-4 w-full text-base border-b-2 border-black dark:border-stone-400">
+		<section className="payment-page-container p-10 flex flex-col-reverse gap-2 lg:gap-20 lg:flex-row lg:justify-center bg-white bg-opacity-50 dark:bg-opacity-10 mx-auto lg:m-0 w-auto max-w-[95vw] rounded">
+			<div className="flex flex-col justify-between p-10">
+				<div className="flex items-center justify-center lg:justify-between gap-4 w-full text-base border-b-2 border-black dark:border-stone-400">
 					<label htmlFor="subtotal" className="w-max">
 						Amount to Pay
 					</label>
@@ -45,7 +45,7 @@ export default function OnlinePayment() {
 								? centsToDollars(subtotal).toFixed(2)
 								: ""
 						}
-						className="py-1 px-1 bg-stone-200 mb-2 outline-none text-stone-800 focus:text-black focus:outline-none dark:text-gray-400 dark:focus:text-white dark:bg-stone-800 dark:focus:bg-stone-600 hover:bg-opacity-90 transition-all duration-300 ease-in-out"
+						className="p-2 bg-stone-200 mb-2 outline-none text-stone-800 focus:text-black focus:outline-none dark:text-gray-400 dark:focus:text-white dark:bg-stone-800 dark:focus:bg-stone-600 hover:bg-opacity-90 transition-all duration-300 ease-in-out"
 						onChange={handleAmountChange}
 					/>
 				</div>
@@ -73,7 +73,7 @@ export default function OnlinePayment() {
 											d="M13 16h-1v-4h-1m1-4h.01M12 18.5a6.5 6.5 0 100-13 6.5 6.5 0 000 13z"
 										/>
 									</svg>
-									<span className="absolute right-full md:right-full z-50 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out bg-gray-700 text-white text-xs rounded p-2 w-48">
+									<span className="absolute right-full lg:right-full z-50 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out bg-gray-700 text-white text-sm rounded p-2 w-48">
 										A 3% credit card processing fee will be
 										added to the total amount.
 									</span>
