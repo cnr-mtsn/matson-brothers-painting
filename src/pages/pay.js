@@ -8,7 +8,7 @@ import { stripeElementAppearance } from "@/utils/stripe"
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY)
 
 export default function OnlinePayment() {
-	const SERVICE_FEE_PERCENTAGE = 0.03
+	const processingFee = process.env.STRIPE_PROCESSING_FEE || 0.03
 
 	const [subtotal, setSubtotal] = useState(0)
 	const [serviceFee, setServiceFee] = useState(0)
@@ -16,9 +16,8 @@ export default function OnlinePayment() {
 
 	const handleAmountChange = e => {
 		const input = e.target.value.replace(/\D/g, "")
-		console.log("Input: ", input, typeof input)
 		const formattedAmount = parseInt(input || 0)
-		const serviceFee = parseInt(input * SERVICE_FEE_PERCENTAGE)
+		const serviceFee = parseInt(input * processingFee)
 		// add the formattedAmount and serviceFee to get the total amount in cents
 		const totalAmount = parseInt(formattedAmount + serviceFee)
 
@@ -29,9 +28,9 @@ export default function OnlinePayment() {
 	const centsToDollars = amount => amount / 100
 
 	return (
-		<section className="payment-page-container p-10 flex flex-col-reverse gap-2 lg:gap-20 lg:flex-row lg:justify-center bg-white bg-opacity-50 dark:bg-opacity-10 mx-auto lg:m-0 w-auto max-w-[95vw] rounded">
+		<section className="payment-page-container p-4 lg:p-10 flex flex-col-reverse gap-2 lg:gap-20 lg:flex-row lg:justify-center bg-white bg-opacity-50 dark:bg-opacity-10 mx-auto w-max max-w-[95vw] rounded">
 			<div className="flex flex-col justify-between p-10">
-				<div className="flex items-center justify-center lg:justify-between gap-4 w-full text-base border-b-2 border-black dark:border-stone-400">
+				<div className="flex items-center justify-center lg:justify-between gap-4 w-full text-base">
 					<label htmlFor="subtotal" className="w-max">
 						Amount to Pay
 					</label>
@@ -45,17 +44,17 @@ export default function OnlinePayment() {
 								? centsToDollars(subtotal).toFixed(2)
 								: ""
 						}
-						className="p-2 bg-stone-200 mb-2 outline-none text-stone-800 focus:text-black focus:outline-none dark:text-gray-400 dark:focus:text-white dark:bg-stone-800 dark:focus:bg-stone-600 hover:bg-opacity-90 transition-all duration-300 ease-in-out"
+						className="p-2 bg-stone-200 mb-2 outline-none text-stone-800 focus:text-black focus:outline-none dark:text-gray-400 dark:focus:text-white dark:bg-stone-800 dark:focus:bg-stone-600 hover:bg-opacity-90 transition-all duration-300 ease-in-out text-center"
 						onChange={handleAmountChange}
 					/>
 				</div>
 				{parseFloat(subtotal) > 0 && (
-					<div className="cost">
+					<div className="cost flex flex-col gap-1 mt-4  border-t-2 border-black dark:border-stone-400">
 						<p className="flex justify-between">
 							Subtotal: <span>{formatMoney(subtotal)}</span>
 						</p>
 						<div className="flex justify-between">
-							<span>Service Fee:</span>
+							<span>Processing Fee:</span>
 							<div className="relative">
 								{formatMoney(serviceFee)}
 								<div className="absolute group text-gray-500 hover:text-gray-300 transition-all duration-300 ease-in-out cursor-pointer absolute -right-5 -top-2">
@@ -93,6 +92,7 @@ export default function OnlinePayment() {
 						mode: "payment",
 						amount: parseInt(totalAmount),
 						currency: "usd",
+						business: "Matson Brothers Painting",
 						appearance: stripeElementAppearance,
 					}}
 				>

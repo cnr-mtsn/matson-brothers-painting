@@ -60,7 +60,7 @@ const PaymentForm = ({ currency, totalAmount }) => {
 			onSubmit={handleSubmit}
 			className="flex flex-col items-center bg-stone-200 dark:bg-stone-800 w-max p-10 mx-auto lg:m-0 rounded-xl"
 		>
-			<PaymentElement />
+			<PaymentElement business="Matson Brothers Painting" />
 			<button
 				type="submit"
 				className="mt-6 bg-stripe-green hover:bg-opacity-80 hover:shadow text-white dark:text-stone-800 py-1 px-2 rounded w-1/2"
