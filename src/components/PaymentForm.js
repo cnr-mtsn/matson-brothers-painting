@@ -3,8 +3,9 @@
 import { useState } from "react"
 import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import { useRouter } from "next/router"
+import { formatMoney } from "@/utils/utils"
 
-const PaymentForm = ({ amount, currency, serviceFee, totalAmount }) => {
+const PaymentForm = ({ currency, totalAmount }) => {
 	const router = useRouter()
 
 	const stripe = useStripe()
@@ -53,28 +54,18 @@ const PaymentForm = ({ amount, currency, serviceFee, totalAmount }) => {
 			setError("error")
 		}
 	}
-	const formatMoney = amount =>
-		new Intl.NumberFormat("en-US", {
-			style: "currency",
-			currency: currency,
-		}).format(amount / 100)
 
 	return (
 		<form
 			onSubmit={handleSubmit}
-			className="flex flex-col items-center bg-white dark:bg-stone-900 w-max p-10 mx-auto rounded-xl"
+			className="flex flex-col items-center bg-stone-200 dark:bg-stone-800 w-max p-10 mx-auto rounded-xl"
 		>
 			<PaymentElement />
-			<div className="cost">
-				<p>Subtotal: {formatMoney(amount)}</p>
-				<p>Service Fee: {formatMoney(serviceFee)}</p>
-				<p>Total: {formatMoney(totalAmount)}</p>
-			</div>
 			<button
 				type="submit"
-				className="mt-6 bg-white dark:bg-stone-700 dark:text-gray-300 hover:bg-gray-100 py-1 px-2 rounded w-1/2 bg-white text-black"
+				className="mt-6 bg-stripe-green hover:bg-opacity-80 hover:shadow text-white dark:text-stone-800 py-1 px-2 rounded w-1/2"
 			>
-				Pay {formatMoney(totalAmount)}
+				Pay {formatMoney(totalAmount, currency)}
 			</button>
 			{error && <p className="text-red-500 my-6">{error}</p>}
 		</form>
