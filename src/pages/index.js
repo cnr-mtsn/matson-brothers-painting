@@ -15,7 +15,7 @@ export default function Home() {
 				<ContactForm />
 			</div>
 			<div className="flex flex-col justify-center gap-6 mt-20">
-				<h2 className="w-full border-b-2 border-white text-3xl text-white pb-4">
+				<h2 className="w-full border-b-2 border-black dark:border-stone-500 text-3xl text-black dark:text-stone-500 pb-4">
 					Some of our work
 				</h2>
 				<ImageCarousel images={images} height={96} />
