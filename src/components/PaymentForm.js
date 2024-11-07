@@ -2,12 +2,14 @@
 
 import { useState } from "react"
 import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js"
-import { useRouter } from "next/router"
 import { formatMoney } from "@/utils/utils"
 
-const PaymentForm = ({ currency, totalAmount }) => {
-	const router = useRouter()
-
+const PaymentForm = ({
+	currency,
+	totalAmount,
+	setPaymentMethod,
+	setServiceFee,
+}) => {
 	const stripe = useStripe()
 	const elements = useElements()
 	const [error, setError] = useState(null)
@@ -60,7 +62,15 @@ const PaymentForm = ({ currency, totalAmount }) => {
 			onSubmit={handleSubmit}
 			className="flex flex-col items-center bg-stone-200 dark:bg-stone-800 w-max p-10 mx-auto lg:m-0 rounded-xl"
 		>
-			<PaymentElement business="Matson Brothers Painting" />
+			<PaymentElement
+				business="Matson Brothers Painting"
+				onChange={e => {
+					const selectedPaymentMethod = e.value.type
+					setPaymentMethod(selectedPaymentMethod)
+					if (selectedPaymentMethod === "us_bank_account")
+						setServiceFee(0)
+				}}
+			/>
 			<button
 				type="submit"
 				className="mt-6 bg-stripe-green hover:bg-opacity-80 hover:shadow text-white dark:text-stone-800 py-1 px-2 rounded w-1/2"

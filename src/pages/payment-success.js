@@ -1,3 +1,7 @@
 export default function PaymentSuccess() {
-	return <div>Payment Success</div>
+	return (
+		<div>
+			<h1>Your payment was successful. Thank you for your business!</h1>
+		</div>
+	)
 }
