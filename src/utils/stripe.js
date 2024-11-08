@@ -1,5 +1,5 @@
 export const stripeElementAppearance = {
-	theme: "night",
+	theme: "stripe",
 	labels: "floating",
 	variables: {
 		fontFamily: ' "Gill Sans", sans-serif',
