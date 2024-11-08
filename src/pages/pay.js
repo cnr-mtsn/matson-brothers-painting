@@ -14,7 +14,15 @@ export default function OnlinePayment() {
 	const [subtotal, setSubtotal] = useState(0)
 	const [serviceFee, setServiceFee] = useState(0)
 	const [totalAmount, setTotalAmount] = useState(0)
+	const [isDarkMode, setIsDarkMode] = useState(false)
 
+	useEffect(() => {
+		const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
+		const handleChange = e => setIsDarkMode(e.matches)
+		mediaQuery.addEventListener("change", handleChange)
+		setIsDarkMode(mediaQuery.matches)
+		return () => mediaQuery.removeEventListener("change", handleChange)
+	}, [])
 	useEffect(() => {
 		if (paymentMethod === "card") {
 			setServiceFee(parseInt(subtotal * processingFee))
@@ -100,7 +108,10 @@ export default function OnlinePayment() {
 						amount: parseInt(totalAmount),
 						currency: "usd",
 						business: "Matson Brothers Painting",
-						appearance: stripeElementAppearance,
+						appearance: {
+							...stripeElementAppearance,
+							theme: isDarkMode ? "night" : "stripe",
+						},
 					}}
 				>
 					<PaymentForm
