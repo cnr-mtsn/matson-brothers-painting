@@ -8,8 +8,6 @@ import { stripeElementAppearance } from "@/utils/stripe"
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY)
 
 export default function OnlinePayment() {
-	const processingFee = process.env.STRIPE_PROCESSING_FEE || 0.03
-
 	const [paymentMethod, setPaymentMethod] = useState("")
 	const [subtotal, setSubtotal] = useState(0)
 	const [serviceFee, setServiceFee] = useState(0)
@@ -24,12 +22,18 @@ export default function OnlinePayment() {
 		return () => mediaQuery.removeEventListener("change", handleChange)
 	}, [])
 	useEffect(() => {
+		console.log("Payment method: ", paymentMethod)
 		if (paymentMethod === "card") {
-			setServiceFee(parseInt(subtotal * processingFee))
-			setTotalAmount(parseInt(subtotal + subtotal * processingFee))
+			// for cards, add a 2.9% + 30 cents fee
+			setServiceFee(parseInt(subtotal * 0.029 + 30))
+			setTotalAmount(parseInt(subtotal + subtotal * 0.029 + 30))
+			// setServiceFee(parseInt(subtotal * 0.03))
+			// setTotalAmount(parseInt(subtotal + subtotal * 0.03))
 		} else {
-			setServiceFee(0)
-			setTotalAmount(subtotal)
+			// for ACH, add a .8% fee with a $5 cap
+			const achFee = Math.min(parseInt(subtotal * 0.008), 500)
+			setServiceFee(achFee)
+			setTotalAmount(parseInt(subtotal + achFee))
 		}
 	}, [subtotal, paymentMethod])
 
