@@ -48,7 +48,7 @@ const ImageCarousel = ({ images, height }) => {
 			</div>
 			<button
 				onClick={prevSlide}
-				className="absolute top-1/2 left-2 bg-white dark:bg-black p-2 rounded-full hover:brightness-90 dark:hover:bg-stone-800 transition-all duration-300 ease-in-out"
+				className="absolute top-1/2 left-2 bg-white dark:bg-stone-800 p-2 rounded-full hover:brightness-90 dark:hover:bg-stone-800 transition-all duration-300 ease-in-out"
 			>
 				<Image
 					height={16}
@@ -59,7 +59,7 @@ const ImageCarousel = ({ images, height }) => {
 			</button>
 			<button
 				onClick={nextSlide}
-				className="absolute top-1/2 right-2 bg-white dark:bg-black p-2 rounded-full hover:brightness-90 dark:hover:bg-stone-800 transition-all duration-300 ease-in-out"
+				className="absolute top-1/2 right-2 bg-white dark:bg-stone-800 p-2 rounded-full hover:brightness-90 dark:hover:bg-stone-800 transition-all duration-300 ease-in-out"
 			>
 				<Image
 					height={16}

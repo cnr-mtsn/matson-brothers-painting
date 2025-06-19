@@ -67,30 +67,23 @@ function ContactForm() {
 					</h1>
 					<input
 						onChange={handleInputChange}
-						required
-						className="w-auto p-2 focus:pl-6 bg-opacity-90 bg-white text-gray-400 focus:text-black focus:outline-none dark:text-gray-400 dark:focus:text-white bg-gray-200 dark:bg-stone-800 focus:bg-white dark:focus:bg-gray-700 hover:bg-opacity-90 transition-all duration-300 ease-in-out"
+						required						
 						type="text"
 						name="name"
 						id="name"
-						placeholder={
-							"name".charAt(0).toUpperCase() + "name".slice(1)
-						}
+						placeholder={"name".charAt(0).toUpperCase() + "name".slice(1)}
 					/>
 					<input
 						onChange={handleInputChange}
 						required
-						className="w-auto p-2 focus:pl-6 bg-opacity-90 bg-white text-gray-400 focus:text-black focus:outline-none dark:text-gray-400 dark:focus:text-white bg-gray-200 dark:bg-stone-800 focus:bg-white dark:focus:bg-gray-700 hover:bg-opacity-90 transition-all duration-300 ease-in-out"
 						type="email"
 						name="email"
 						id="email"
-						placeholder={
-							"email".charAt(0).toUpperCase() + "email".slice(1)
-						}
+						placeholder={"email".charAt(0).toUpperCase() + "email".slice(1)}
 					/>
 					<textarea
 						onChange={handleInputChange}
 						required
-						className="w-auto p-2 focus:pl-6 bg-opacity-90 bg-white text-gray-400 focus:text-black focus:outline-none dark:text-gray-400 dark:focus:text-white bg-gray-200 dark:bg-stone-800 focus:bg-white dark:focus:bg-gray-700 hover:bg-opacity-90 transition-all duration-300 ease-in-out"
 						name="message"
 						id="message"
 						placeholder={
@@ -101,7 +94,6 @@ function ContactForm() {
 					<input
 						type="submit"
 						value="Send"
-						className="w-auto mx-auto text-gray-400 focus:text-black dark:text-gray-400 dark:focus:text-white focus:outline-none dark:focus:bg-gray-700 dark:text-gray-400 bg-gray-200 focus:bg-white dark:bg-stone-800 py-2 px-20 rounded-sm hover:brightness-110 cursor-pointer transition-all duration-300 ease-in-out"
 					/>
 				</form>
 			)}

@@ -7,9 +7,9 @@ const Footer = () => {
 			<div className="max-w-7xl mx-auto">
 				<div className="flex flex-col gap-4 items-center justify-center">
 					<img
-						src="/logos/light-logo-no-bg.png"
+						src="/logos/new-logo-no-bg.png"
 						alt={siteData.name}
-						className="dark:invert h-40 lg:h-64 transition-all duration-300 ease-in-out"
+						className="dark:invert h-auto max-h-80 transition-all duration-300 ease-in-out"
 					/>
 					<div className="flex items-center gap-2 mb-2 lg:mb-0 lg:mr-4">
 						<Image

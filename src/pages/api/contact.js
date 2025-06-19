@@ -30,7 +30,7 @@ export default async function handler(req, res) {
 	try {
 		await transporter.sendMail({
 			from: user,
-			to: recipient,
+			to: "conner@matsonbrotherspainting.com",
 			replyTo: email,
 			subject: `Contact form submission from [${name}]`,
 			html: `
