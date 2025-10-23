@@ -13,7 +13,7 @@ export default async function handler(req, res) {
 			clientId: useProduction ? process.env.QB_PROD_CLIENT_ID : process.env.QB_DEV_CLIENT_ID,
 			clientSecret: useProduction ? process.env.QB_PROD_CLIENT_SECRET : process.env.QB_DEV_CLIENT_SECRET,
 			environment: useProduction ? 'production' : 'sandbox',
-			redirectUri: `${req.headers.origin || 'https://d17ae480e6bb.ngrok-free.app'}/api/qb/callback`,
+			redirectUri: `${req.headers.origin || 'https://matsonbrotherspainting.com'}/api/qb/callback`,
 		})
 
 		// Exchange authorization code for tokens

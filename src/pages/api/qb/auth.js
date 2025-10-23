@@ -6,7 +6,7 @@ export default async function handler(req, res) {
 		const useProduction = process.env.QB_ENVIRONMENT === 'production'
 
 		// Get the origin from headers - check multiple sources
-		const origin = req.headers.origin || 'https://d17ae480e6bb.ngrok-free.app'
+		const origin = req.headers.origin || 'https://matsonbrotherspainting.com'
 
 		const redirectUri = `${origin}/api/qb/callback`
 
