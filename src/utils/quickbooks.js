@@ -1,24 +1,78 @@
 import OAuthClient from "intuit-oauth"
 import fs from 'fs'
 import path from 'path'
+import { kv } from '@vercel/kv'
 
-// Get token data from token file
-export function getTokenData() {
+// Save token data to KV storage or file
+export async function saveTokenData(tokenData) {
+	// Try KV storage first (production)
+	if (process.env.KV_REST_API_URL) {
+		try {
+			await kv.set('qb-tokens', tokenData)
+			console.log('✅ Tokens saved to Vercel KV')
+			return true
+		} catch (error) {
+			console.error('❌ Error saving to KV:', error)
+		}
+	}
+
+	// Fallback to file storage (local development)
+	try {
+		const tokenPath = path.join(process.cwd(), 'qb-tokens.json')
+		fs.writeFileSync(tokenPath, JSON.stringify(tokenData, null, 2))
+		console.log('✅ Tokens saved to file')
+		return true
+	} catch (error) {
+		console.error('❌ Error saving to file:', error)
+		return false
+	}
+}
+
+// Get token data from KV storage, environment variables, or file
+export async function getTokenData() {
+	// First, try KV storage (production)
+	if (process.env.KV_REST_API_URL) {
+		try {
+			const tokenData = await kv.get('qb-tokens')
+			if (tokenData) {
+				console.log('📖 Tokens retrieved from Vercel KV')
+				return tokenData
+			}
+		} catch (error) {
+			console.error('Error reading from KV:', error)
+		}
+	}
+
+	// Then check environment variables (fallback for initial setup)
+	if (process.env.QB_ACCESS_TOKEN && process.env.QB_REFRESH_TOKEN) {
+		console.log('📖 Tokens retrieved from environment variables')
+		return {
+			access_token: process.env.QB_ACCESS_TOKEN,
+			refresh_token: process.env.QB_REFRESH_TOKEN,
+			expires_in: parseInt(process.env.QB_TOKEN_EXPIRES_IN || '3600'),
+			created_at: parseInt(process.env.QB_TOKEN_CREATED_AT || Date.now()),
+			realm_id: process.env.QB_COMPANY_ID,
+		}
+	}
+
+	// Finally try token file (local development)
 	try {
 		const tokenPath = path.join(process.cwd(), 'qb-tokens.json')
 		if (fs.existsSync(tokenPath)) {
 			const tokenData = JSON.parse(fs.readFileSync(tokenPath, 'utf8'))
+			console.log('📖 Tokens retrieved from file')
 			return tokenData
 		}
 	} catch (error) {
 		console.error('Error reading token file:', error)
 	}
+
 	return null
 }
 
 // Check if token needs to be refreshed (within 5 minutes of expiring)
-export function tokenNeedsRefresh() {
-	const tokenData = getTokenData()
+export async function tokenNeedsRefresh() {
+	const tokenData = await getTokenData()
 	if (!tokenData) return true
 
 	const createdAt = tokenData.created_at
@@ -76,7 +130,7 @@ export async function refreshAccessToken() {
 			realm_id: tokenData.realm_id,
 		}
 
-		fs.writeFileSync(tokenPath, JSON.stringify(updatedTokenData, null, 2))
+		await saveTokenData(updatedTokenData)
 		console.log('✅ QuickBooks token refreshed successfully!')
 
 		return updatedTokenData.access_token

@@ -1,19 +1,16 @@
 import OAuthClient from "intuit-oauth"
-import fs from 'fs'
-import path from 'path'
+import { getTokenData, saveTokenData } from "@/utils/quickbooks"
 
 export default async function handler(req, res) {
 	try {
 		// Read stored tokens
-		const tokenPath = path.join(process.cwd(), 'qb-tokens.json')
+		const tokenData = await getTokenData()
 
-		if (!fs.existsSync(tokenPath)) {
+		if (!tokenData) {
 			return res.status(404).json({
 				message: 'No stored tokens found. Please connect to QuickBooks first.',
 			})
 		}
-
-		const tokenData = JSON.parse(fs.readFileSync(tokenPath, 'utf8'))
 
 		// Use QB_ENVIRONMENT to determine if we're using production or sandbox QuickBooks
 		const useProduction = process.env.QB_ENVIRONMENT === 'production'
@@ -52,7 +49,7 @@ export default async function handler(req, res) {
 			realm_id: tokenData.realm_id,
 		}
 
-		fs.writeFileSync(tokenPath, JSON.stringify(updatedTokenData, null, 2))
+		await saveTokenData(updatedTokenData)
 
 		return res.status(200).json({
 			message: 'Token refreshed successfully!',

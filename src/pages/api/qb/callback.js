@@ -1,6 +1,7 @@
 import OAuthClient from "intuit-oauth"
 import fs from 'fs'
 import path from 'path'
+import { saveTokenData } from "@/utils/quickbooks"
 
 export default async function handler(req, res) {
 	try {
@@ -38,9 +39,8 @@ export default async function handler(req, res) {
 			realm_id: companyId,
 		}
 
-		// Store in a local file (development only - use database in production)
-		const tokenPath = path.join(process.cwd(), 'qb-tokens.json')
-		fs.writeFileSync(tokenPath, JSON.stringify(tokenData, null, 2))
+		// Save tokens to KV storage or file
+		await saveTokenData(tokenData)
 
 		// Return HTML page with success message and instructions
 		return res.status(200).send(`
@@ -120,15 +120,14 @@ export default async function handler(req, res) {
 						</div>
 
 						<div class="instructions">
-							<strong>Next Steps:</strong>
-							<ol>
-								<li>Your tokens have been saved to <code>qb-tokens.json</code></li>
-								<li>Add this line to your <code>.env</code> file:</li>
-							</ol>
-							<div class="token-box">
-QB_ACCESS_TOKEN=${token.access_token}
-							</div>
-							<p><strong>Important:</strong> This token expires in ${Math.round(token.expires_in / 3600)} hours. You can refresh it using the refresh endpoint.</p>
+							<strong>✅ Tokens Saved Successfully!</strong>
+							<p>Your QuickBooks tokens have been saved to ${process.env.KV_REST_API_URL ? 'Vercel KV storage' : 'local file storage'}.</p>
+							<ul style="text-align: left; margin: 20px 0;">
+								<li>✓ Access token will be automatically refreshed every hour</li>
+								<li>✓ No manual intervention needed</li>
+								<li>✓ Tokens are secure and persistent</li>
+							</ul>
+							<p><strong>Note:</strong> Refresh token expires in ${Math.round(token.x_refresh_token_expires_in / 86400)} days. You'll need to re-authenticate before then.</p>
 						</div>
 
 						<button onclick="window.location.href='/qb-admin'">Return to Admin</button>
