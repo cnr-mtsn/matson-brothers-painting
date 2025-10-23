@@ -1,4 +1,5 @@
 // components/PaymentForm.js
+'use client'
 
 import { useState } from "react"
 import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js"
@@ -9,6 +10,7 @@ const PaymentForm = ({
 	totalAmount,
 	setPaymentMethod,
 	setServiceFee,
+	invoiceData,
 }) => {
 	const stripe = useStripe()
 	const elements = useElements()
@@ -35,6 +37,12 @@ const PaymentForm = ({
 					paymentMethod: "card",
 					amount: totalAmount,
 					currency,
+					invoiceData: invoiceData ? {
+						invoiceId: invoiceData.id,
+						invoiceNumber: invoiceData.docNumber,
+						customerName: invoiceData.customerName,
+						balance: invoiceData.balance,
+					} : null,
 				}),
 			})
 			const data = await response.json()
@@ -60,7 +68,7 @@ const PaymentForm = ({
 	return (
 		<form
 			onSubmit={handleSubmit}
-			className="flex flex-col items-center bg-stone-200 dark:bg-stone-800 w-max p-10 mx-auto lg:m-0 rounded-xl"
+			className="flex flex-col items-stretch w-full p-6 bg-transparent"
 		>
 			<PaymentElement
 				business="Matson Brothers Painting"
@@ -73,7 +81,7 @@ const PaymentForm = ({
 			/>
 			<button
 				type="submit"
-				className="mt-6 bg-stripe-green hover:bg-opacity-80 hover:shadow text-white dark:text-stone-800 py-1 px-2 rounded w-1/2"
+				className="mt-6 bg-stripe-green hover:bg-opacity-80 hover:shadow text-white dark:text-stone-800 py-3 px-6 rounded-lg font-semibold w-full"
 			>
 				Pay {formatMoney(totalAmount, currency)}
 			</button>

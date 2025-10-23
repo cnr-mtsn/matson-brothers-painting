@@ -1,4 +1,6 @@
 import { siteData } from "@/data/siteData"
+import Header from "@/components/Header"
+import Footer from "@/components/Footer"
 import "../styles/globals.css"
 import Head from "next/head"
 
@@ -14,10 +16,12 @@ export default function App({ Component, pageProps }) {
 				/>
 				<link rel="icon" href="/favicons/favicon.ico" />
 			</Head>
+			<Header />
 			{/* <div className="min-h-[90vh] bg-[url('/images/photo-16.png')] bg-no-repeat bg-cover bg-blend-overlay bg-stone-800 bg-opacity-50 dark:bg-opacity-70"> */}
 			<div className="">
 				<Component {...pageProps} />
 			</div>
+			<Footer />
 		</main>
 	)
 }

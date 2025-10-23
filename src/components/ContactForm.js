@@ -50,7 +50,7 @@ function ContactForm() {
 	}
 
 	return (
-		<div className="border-t-2 border-b-2 border-blue-900 py-6 px-4 rounded-sm w-full sm:w-3/4 md:w-2/3 lg:w-1/3 rounded-md">
+		<div className="border-t-2 border-b-2 border-blue-900 py-6 px-4 rounded-sm w-full rounded-md">
 			{(loading || submitted) && (
 				<p className="text-center">
 					{loading ? "Sending..." : submitted ? response.message : ""}

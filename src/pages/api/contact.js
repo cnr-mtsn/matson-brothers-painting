@@ -8,14 +8,8 @@ export default async function handler(req, res) {
 		process.env.NODE_ENV === "development"
 			? process.env.NEXT_PUBLIC_DEV_EMAIL_FROM_USER
 			: process.env.NEXT_EMAIL_FROM_USER
-	const pass =
-		process.env.NODE_ENV === "development"
-			? process.env.NEXT_PUBLIC_DEV_EMAIL_PASSWORD
-			: process.env.NEXT_EMAIL_PASSWORD
-	const recipient =
-		process.env.NODE_ENV === "development"
-			? process.env.NEXT_PUBLIC_DEV_EMAIL_TO_USER
-			: process.env.NEXT_EMAIL_TO_USER
+	const pass = process.env.NEXT_EMAIL_PASSWORD
+	const recipient = process.env.NEXT_EMAIL_TO_USER
 
 	const transporter = nodemailer.createTransport({
 		host: "smtp.gmail.com",

@@ -7,4 +7,18 @@ export const stripeElementAppearance = {
 		borderRadius: "5px",
 		fontSizeBase: "16px",
 	},
+	rules: {
+		'.Tab': {
+			width: '100%',
+		},
+		'.Tab--selected': {
+			width: '100%',
+		},
+		'.Input': {
+			width: '100%',
+		},
+		'.Block': {
+			width: '100%',
+		},
+	},
 }
