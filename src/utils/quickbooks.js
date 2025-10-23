@@ -8,12 +8,23 @@ export async function saveTokenData(tokenData) {
 	// Try KV storage first (production)
 	if (process.env.KV_REST_API_URL) {
 		try {
+			console.log('💾 Attempting to save tokens to Vercel KV...')
+			console.log('Token data to save:', {
+				hasAccessToken: !!tokenData.access_token,
+				hasRefreshToken: !!tokenData.refresh_token,
+				realmId: tokenData.realm_id,
+				createdAt: tokenData.created_at,
+				expiresIn: tokenData.expires_in
+			})
 			await kv.set('qb-tokens', tokenData)
-			console.log('✅ Tokens saved to Vercel KV')
+			console.log('✅ Tokens saved to Vercel KV successfully')
 			return true
 		} catch (error) {
-			console.error('❌ Error saving to KV:', error)
+			console.error('❌ Error saving to KV:', error.message)
+			console.error('Full error:', error)
 		}
+	} else {
+		console.log('ℹ️ KV_REST_API_URL not set, skipping KV storage')
 	}
 
 	// Fallback to file storage (local development)
@@ -33,14 +44,26 @@ export async function getTokenData() {
 	// First, try KV storage (production)
 	if (process.env.KV_REST_API_URL) {
 		try {
+			console.log('🔍 Attempting to retrieve tokens from Vercel KV...')
 			const tokenData = await kv.get('qb-tokens')
 			if (tokenData) {
-				console.log('📖 Tokens retrieved from Vercel KV')
+				console.log('📖 Tokens retrieved from Vercel KV successfully')
+				console.log('Token data:', {
+					hasAccessToken: !!tokenData.access_token,
+					hasRefreshToken: !!tokenData.refresh_token,
+					realmId: tokenData.realm_id,
+					createdAt: tokenData.created_at,
+					expiresIn: tokenData.expires_in
+				})
 				return tokenData
+			} else {
+				console.warn('⚠️ No tokens found in Vercel KV')
 			}
 		} catch (error) {
-			console.error('Error reading from KV:', error)
+			console.error('❌ Error reading from KV:', error)
 		}
+	} else {
+		console.log('ℹ️ KV_REST_API_URL not set, skipping KV storage')
 	}
 
 	// Then check environment variables (fallback for initial setup)
@@ -148,13 +171,13 @@ export async function getAccessToken() {
 	}
 
 	// Check if token needs refresh
-	if (tokenNeedsRefresh()) {
+	if (await tokenNeedsRefresh()) {
 		console.log('⏰ Token is expiring soon, refreshing automatically...')
 		return await refreshAccessToken()
 	}
 
 	// Return current token
-	const tokenData = getTokenData()
+	const tokenData = await getTokenData()
 	return tokenData?.access_token || null
 }
 
@@ -174,7 +197,7 @@ export function getQBClient() {
 // Make authenticated API request to QuickBooks
 export async function makeQBRequest(endpoint, accessToken) {
 	// Get company ID from token file (realm_id from OAuth)
-	const tokenData = getTokenData()
+	const tokenData = await getTokenData()
 	const companyId = tokenData?.realm_id || process.env.QB_COMPANY_ID
 
 	// Determine environment - production uses api.intuit.com, sandbox uses sandbox-quickbooks.api.intuit.com
