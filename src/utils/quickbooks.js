@@ -1,12 +1,21 @@
 import OAuthClient from "intuit-oauth"
 import fs from 'fs'
 import path from 'path'
-import { kv } from '@vercel/kv'
+import { Redis } from '@upstash/redis'
+
+// Initialize Redis with custom environment variables
+let redis = null
+if (process.env.QB_TOKENS_KV_REST_API_URL && process.env.QB_TOKENS_KV_REST_API_TOKEN) {
+	redis = new Redis({
+		url: process.env.QB_TOKENS_KV_REST_API_URL,
+		token: process.env.QB_TOKENS_KV_REST_API_TOKEN,
+	})
+}
 
 // Save token data to KV storage or file
 export async function saveTokenData(tokenData) {
 	// Try KV storage first (production)
-	if (process.env.QB_TOKENS_KV_REST_API_URL) {
+	if (redis) {
 		try {
 			console.log('💾 Attempting to save tokens to Vercel KV...')
 			console.log('Token data to save:', {
@@ -16,7 +25,7 @@ export async function saveTokenData(tokenData) {
 				createdAt: tokenData.created_at,
 				expiresIn: tokenData.expires_in
 			})
-			await kv.set('qb-tokens', tokenData)
+			await redis.set('qb-tokens', JSON.stringify(tokenData))
 			console.log('✅ Tokens saved to Vercel KV successfully')
 			return true
 		} catch (error) {
@@ -24,7 +33,7 @@ export async function saveTokenData(tokenData) {
 			console.error('Full error:', error)
 		}
 	} else {
-		console.log('ℹ️ QB_TOKENS_KV_REST_API_URL not set, skipping KV storage')
+		console.log('ℹ️ Redis client not initialized, skipping KV storage')
 	}
 
 	// Fallback to file storage (local development)
@@ -42,11 +51,12 @@ export async function saveTokenData(tokenData) {
 // Get token data from KV storage, environment variables, or file
 export async function getTokenData() {
 	// First, try KV storage (production)
-	if (process.env.QB_TOKENS_KV_REST_API_URL) {
+	if (redis) {
 		try {
 			console.log('🔍 Attempting to retrieve tokens from Vercel KV...')
-			const tokenData = await kv.get('qb-tokens')
-			if (tokenData) {
+			const tokenString = await redis.get('qb-tokens')
+			if (tokenString) {
+				const tokenData = typeof tokenString === 'string' ? JSON.parse(tokenString) : tokenString
 				console.log('📖 Tokens retrieved from Vercel KV successfully')
 				console.log('Token data:', {
 					hasAccessToken: !!tokenData.access_token,
@@ -63,7 +73,7 @@ export async function getTokenData() {
 			console.error('❌ Error reading from KV:', error)
 		}
 	} else {
-		console.log('ℹ️ QB_TOKENS_KV_REST_API_URL not set, skipping KV storage')
+		console.log('ℹ️ Redis client not initialized, skipping KV storage')
 	}
 
 	// Then check environment variables (fallback for initial setup)
