@@ -4,6 +4,7 @@ import { loadStripe } from "@stripe/stripe-js"
 import { Elements } from "@stripe/react-stripe-js"
 import { useEffect, useState } from "react"
 import Head from "next/head"
+import { useRouter } from "next/router"
 import PaymentForm from "@/components/PaymentForm"
 import { formatMoney } from "@/utils/utils"
 import { stripeElementAppearance } from "@/utils/stripe"
@@ -12,6 +13,7 @@ import { siteData } from "../data/siteData"
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY)
 
 export default function OnlinePayment() {
+	const router = useRouter()
 	const [paymentMethod, setPaymentMethod] = useState("")
 	const [subtotal, setSubtotal] = useState(0)
 	const [serviceFee, setServiceFee] = useState(0)
@@ -35,6 +37,20 @@ export default function OnlinePayment() {
 		setIsDarkMode(mediaQuery.matches)
 		return () => mediaQuery.removeEventListener("change", handleChange)
 	}, [])
+
+	// Handle URL parameters for automatic invoice lookup
+	useEffect(() => {
+		if (!router.isReady) return
+
+		const { invoice } = router.query
+		if (invoice) {
+			// Set the invoice number and automatically search for it
+			setInvoiceNumber(invoice)
+			// Trigger the search automatically
+			searchInvoiceByNumber(invoice)
+		}
+	}, [router.isReady, router.query])
+
 	useEffect(() => {
 		console.log("Payment method: ", paymentMethod)
 		if (paymentMethod === "us_bank_account" ) {
@@ -57,6 +73,49 @@ export default function OnlinePayment() {
 	}
 
 	const centsToDollars = amount => amount / 100
+
+	// Helper function to search for invoice by number
+	const searchInvoiceByNumber = async (invoiceNum) => {
+		setSearchError("")
+		setSearchResults([])
+		setSelectedInvoice(null)
+		setIsSearching(true)
+
+		try {
+			const response = await fetch("/api/qb/search-invoices", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					invoiceNumber: invoiceNum,
+					email: "",
+					name: "",
+				}),
+			})
+
+			const data = await response.json()
+
+			if (response.ok) {
+				if (data.invoices.length === 0) {
+					setSearchError("No invoices found matching your search")
+				} else if (data.invoices.length === 1) {
+					// Auto-select if only one invoice found
+					selectInvoice(data.invoices[0])
+				} else {
+					// Show list of invoices to choose from
+					setSearchResults(data.invoices)
+				}
+			} else {
+				setSearchError(data.message || "Error searching for invoices")
+			}
+		} catch (error) {
+			console.error("Search error:", error)
+			setSearchError("Error connecting to server. Please try again.")
+		} finally {
+			setIsSearching(false)
+		}
+	}
 
 	// Search for invoices
 	const handleInvoiceSearch = async (e) => {
