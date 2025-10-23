@@ -6,7 +6,7 @@ import { kv } from '@vercel/kv'
 // Save token data to KV storage or file
 export async function saveTokenData(tokenData) {
 	// Try KV storage first (production)
-	if (process.env.KV_REST_API_URL) {
+	if (process.env.QB_TOKENS_KV_REST_API_URL) {
 		try {
 			console.log('💾 Attempting to save tokens to Vercel KV...')
 			console.log('Token data to save:', {
@@ -24,7 +24,7 @@ export async function saveTokenData(tokenData) {
 			console.error('Full error:', error)
 		}
 	} else {
-		console.log('ℹ️ KV_REST_API_URL not set, skipping KV storage')
+		console.log('ℹ️ QB_TOKENS_KV_REST_API_URL not set, skipping KV storage')
 	}
 
 	// Fallback to file storage (local development)
@@ -42,7 +42,7 @@ export async function saveTokenData(tokenData) {
 // Get token data from KV storage, environment variables, or file
 export async function getTokenData() {
 	// First, try KV storage (production)
-	if (process.env.KV_REST_API_URL) {
+	if (process.env.QB_TOKENS_KV_REST_API_URL) {
 		try {
 			console.log('🔍 Attempting to retrieve tokens from Vercel KV...')
 			const tokenData = await kv.get('qb-tokens')
@@ -63,7 +63,7 @@ export async function getTokenData() {
 			console.error('❌ Error reading from KV:', error)
 		}
 	} else {
-		console.log('ℹ️ KV_REST_API_URL not set, skipping KV storage')
+		console.log('ℹ️ QB_TOKENS_KV_REST_API_URL not set, skipping KV storage')
 	}
 
 	// Then check environment variables (fallback for initial setup)

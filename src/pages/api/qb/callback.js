@@ -121,7 +121,7 @@ export default async function handler(req, res) {
 
 						<div class="instructions">
 							<strong>✅ Tokens Saved Successfully!</strong>
-							<p>Your QuickBooks tokens have been saved to ${process.env.KV_REST_API_URL ? 'Vercel KV storage' : 'local file storage'}.</p>
+							<p>Your QuickBooks tokens have been saved to ${process.env.QB_TOKENS_KV_REST_API_URL ? 'Vercel KV storage' : 'local file storage'}.</p>
 							<ul style="text-align: left; margin: 20px 0;">
 								<li>✓ Access token will be automatically refreshed every hour</li>
 								<li>✓ No manual intervention needed</li>
