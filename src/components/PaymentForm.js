@@ -34,7 +34,6 @@ const PaymentForm = ({
 					"Content-Type": "application/json",
 				},
 				body: JSON.stringify({
-					paymentMethod: "card",
 					amount: totalAmount,
 					currency,
 					invoiceData: invoiceData ? {

@@ -10,11 +10,11 @@ import { formatMoney } from "@/utils/utils"
 import { stripeElementAppearance } from "@/utils/stripe"
 import { siteData } from "../data/siteData"
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY)
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY_TEST)
 
 export default function OnlinePayment() {
 	const router = useRouter()
-	const [paymentMethod, setPaymentMethod] = useState("")
+	const [paymentMethod, setPaymentMethod] = useState("us_bank_account")
 	const [subtotal, setSubtotal] = useState(0)
 	const [serviceFee, setServiceFee] = useState(0)
 	const [totalAmount, setTotalAmount] = useState(0)
@@ -53,7 +53,11 @@ export default function OnlinePayment() {
 
 	useEffect(() => {
 		console.log("Payment method: ", paymentMethod)
-		if (paymentMethod === "us_bank_account" ) {
+		if (subtotal === 0) {
+			// Don't calculate fees when there's no subtotal
+			setServiceFee(0)
+			setTotalAmount(0)
+		} else if (paymentMethod === "us_bank_account" ) {
 			// for ACH, add a .8% fee with a $5 cap
 			const achFee = parseInt(subtotal * 0.008)
 			setServiceFee(achFee)
@@ -542,6 +546,7 @@ export default function OnlinePayment() {
 												amount: parseInt(totalAmount),
 												currency: "usd",
 												business: "Matson Brothers Painting",
+												paymentMethodOrder: ['us_bank_account', 'card'],
 												appearance: {
 													...stripeElementAppearance,
 													theme: isDarkMode ? "night" : "stripe",
