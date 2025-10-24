@@ -10,7 +10,7 @@ import { formatMoney } from "@/utils/utils"
 import { stripeElementAppearance } from "@/utils/stripe"
 import { siteData } from "../data/siteData"
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY_TEST)
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY)
 
 export default function OnlinePayment() {
 	const router = useRouter()

@@ -2,7 +2,7 @@ import Stripe from "stripe"
 
 export default async function handler(req, res) {
 	// Use the same Stripe key as the payment endpoint
-	const stripe = new Stripe(process.env.STRIPE_SECRET_KEY_TEST, {
+	const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 		apiVersion: "2024-09-30.acacia",
 	})
 
