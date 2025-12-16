@@ -21,8 +21,9 @@ export default async function handler(req, res) {
 		// Add invoice metadata to Stripe payment if invoice data is provided
 		if (invoiceData) {
 			paymentIntentData.metadata = {
-				qb_invoice_id: invoiceData.invoiceId,
-				qb_invoice_number: invoiceData.invoiceNumber,
+				db_invoice_id: invoiceData.invoiceId, // Database invoice ID
+				customer_id: invoiceData.customerId, // Database customer ID
+				invoice_number: invoiceData.invoiceNumber,
 				customer_name: invoiceData.customerName,
 				invoice_balance: invoiceData.balance,
 			}

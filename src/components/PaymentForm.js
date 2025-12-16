@@ -15,6 +15,8 @@ const PaymentForm = ({
 	const stripe = useStripe()
 	const elements = useElements()
 	const [error, setError] = useState(null)
+	const [isReady, setIsReady] = useState(false)
+	const [hasUserInteracted, setHasUserInteracted] = useState(false)
 
 	const handleSubmit = async e => {
 		e.preventDefault()
@@ -39,6 +41,7 @@ const PaymentForm = ({
 					invoiceData: invoiceData ? {
 						invoiceId: invoiceData.id,
 						invoiceNumber: invoiceData.docNumber,
+						customerId: invoiceData.customerId,
 						customerName: invoiceData.customerName,
 						balance: invoiceData.balance,
 					} : null,
@@ -71,11 +74,20 @@ const PaymentForm = ({
 		>
 			<PaymentElement
 				business="Matson Brothers Painting"
+				onReady={() => {
+					console.log("PaymentElement is ready")
+					setIsReady(true)
+					// Allow onChange events after a short delay to ensure user interactions are captured
+					setTimeout(() => setHasUserInteracted(true), 100)
+				}}
 				onChange={e => {
 					const selectedPaymentMethod = e.value.type
-					setPaymentMethod(selectedPaymentMethod)
-					if (selectedPaymentMethod === "us_bank_account")
-						setServiceFee(0)
+					console.log("Payment method changed to:", selectedPaymentMethod, "hasUserInteracted:", hasUserInteracted)
+
+					// Only update payment method if user has interacted (ignore automatic onChange on mount)
+					if (hasUserInteracted) {
+						setPaymentMethod(selectedPaymentMethod)
+					}
 				}}
 			/>
 			<button
